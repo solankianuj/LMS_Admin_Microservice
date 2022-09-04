@@ -17,7 +17,7 @@ public class AdminDTO {
     private String lastName;
     @Pattern(regexp = "^[6-9]{1}[0-9]{9}$",message = "Mobile Number is Invalid !")
     private String mobileNo;
-//    @Pattern(regexp = "^[a-z]{1}[@]{1}[a-z 0-9]{2,}[.]{1}[a-z 0-9]{3,}",message = "invalid")
+    //    @Pattern(regexp = "^[a-z]{1}[@]{1}[a-z 0-9]{2,}[.]{1}[a-z 0-9]{3,}",message = "invalid")
     private String emailId;
     @NotNull(message = "password can not be Null")
     private String password;
@@ -25,4 +25,5 @@ public class AdminDTO {
     private String profilePath;
     @NotNull(message = "Status Can't be Null.")
     private String status;
+
 }

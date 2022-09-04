@@ -55,7 +55,7 @@ public class MailServices {
             session.getProperties().put("mail.smtp.starttls.enable", "true");
             session.getProperties().put("mail.smtp.ssl.trust", "smtp.gmail.com");
             Transport.send(msg);
-            log.info("Email Sent Successfully.........");
+             log.info("Email Sent Successfully.........");
         }
         catch (Exception e)
         {

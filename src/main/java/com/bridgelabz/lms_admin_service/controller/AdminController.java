@@ -1,10 +1,11 @@
 package com.bridgelabz.lms_admin_service.controller;
 
 import com.bridgelabz.lms_admin_service.dto.AdminDTO;
-import com.bridgelabz.lms_admin_service.model.AdminModel;
 import com.bridgelabz.lms_admin_service.services.IAdminServices;
 import com.bridgelabz.lms_admin_service.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 /**
  * purpose:Admin Operation Controller
  * @author Anuj Solanki
+ * @date 3/09/2022
  */
 
 @RestController
@@ -26,8 +28,9 @@ public class AdminController {
      * @return admin
      */
     @PostMapping("/addAdmin")
-    public AdminModel addAdmin(@Valid @RequestBody AdminDTO adminDTO){
-        return adminServices.addAdmin(adminDTO);
+    public ResponseEntity<Response> addAdmin(@Valid @RequestBody AdminDTO adminDTO){
+        Response response= adminServices.addAdmin(adminDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -36,8 +39,9 @@ public class AdminController {
      * @return admin details
      */
     @GetMapping("/getAdmin")
-    public AdminModel getAdmin(@RequestHeader String token){
-      return   adminServices.getAdmin(token);
+    public ResponseEntity<Response> getAdmin(@RequestHeader String token){
+        Response response=adminServices.getAdmin(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -48,8 +52,10 @@ public class AdminController {
      */
 
     @PutMapping("/updateAdmin")
-    public AdminModel updateAdmin( @RequestHeader String token,@Valid @RequestBody AdminDTO adminDTO){
-        return adminServices.updateAdmin(token, adminDTO);
+    public ResponseEntity<Response> updateAdmin( @RequestHeader String token,@Valid @RequestBody AdminDTO adminDTO){
+        Response response= adminServices.updateAdmin(token, adminDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     /**
@@ -58,8 +64,9 @@ public class AdminController {
      * @return deleted admin
      */
     @DeleteMapping("/deleteAdmin")
-    public AdminModel deleteAdmin(@RequestHeader String token){
-        return adminServices.deleteAdmin(token);
+    public ResponseEntity<Response>  deleteAdmin(@RequestHeader String token){
+        Response response = adminServices.deleteAdmin(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -69,8 +76,9 @@ public class AdminController {
      * @return change password link
      */
     @GetMapping("/resetPassword")
-    public String resetPassword( @RequestParam String emailId,String newPwd){
-        return adminServices.resetPassword(emailId,newPwd);
+    public ResponseEntity<Response> resetPassword( @RequestParam String emailId,String newPwd){
+        Response response = adminServices.resetPassword(emailId,newPwd);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     /**
@@ -80,8 +88,9 @@ public class AdminController {
      * @return
      */
     @PutMapping("/changePassword/{newPwd}")
-    public AdminModel changePassword( @RequestHeader String token,@PathVariable String newPwd){
-        return adminServices.changePassword(token,newPwd);
+    public ResponseEntity<Response> changePassword( @RequestHeader String token,@PathVariable String newPwd){
+        Response response = adminServices.changePassword(token,newPwd);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     /**
@@ -91,8 +100,9 @@ public class AdminController {
      * @return
      */
     @PutMapping("/addProfile")
-    public AdminModel addProfile(@RequestHeader String token,@RequestParam String path){
-        return adminServices.addProfile(token, path);
+    public ResponseEntity<Response> addProfile(@RequestHeader String token,@RequestParam String path){
+        Response  response = adminServices.addProfile(token, path);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     /**
@@ -102,8 +112,18 @@ public class AdminController {
      * @return
      */
     @GetMapping("/login")
-    public Response login(@RequestParam String email, @RequestParam String password){
-        return adminServices.login(email, password);
+    public ResponseEntity<Response> login(@RequestParam String email, @RequestParam String password){
+        Response response= adminServices.login(email, password);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    /**
+     * purpose:validating user
+     * @param token
+     * @return
+     */
+    @GetMapping("/validatingUser/{token}")
+    Boolean validatingUser(@PathVariable String token){
+        return adminServices.validateUser(token);
     }
 
 }

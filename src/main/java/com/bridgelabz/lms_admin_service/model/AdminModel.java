@@ -1,6 +1,7 @@
 package com.bridgelabz.lms_admin_service.model;
 
 import com.bridgelabz.lms_admin_service.dto.AdminDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "AdminData")
 @Data
+@AllArgsConstructor
 public class AdminModel {
     @Id
     @GenericGenerator(name = "AdminData",strategy = "increment")

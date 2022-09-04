@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Response {
-    private String errorMsg;
-    private long errorCode;
-    private Object token;
+    private String statusMsg;
+    private long statusCode;
+    private Object object;
 
     public Response() {
 
